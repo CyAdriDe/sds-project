@@ -1,7 +1,9 @@
 # sds-project
 
 ## Topology
-
+<img src="./resources/img/topo.png"
+     alt="Topology of the project"
+     style="float: left; margin-right: 10px;" />
 ## Running the topology
 First install the dependencies with:
 ```
