@@ -2,7 +2,7 @@
 ## Running the topology
 First enable the venv with:
 ```
-source sds-venv/bin/activate
+source sds_venv/bin/activate
 ```
 After that you must run the topology with:
 ```
