@@ -34,13 +34,13 @@ class NetworkTopo( Topo ):
         s1, sDMZ, s2, sEXT = [ self.addSwitch( s ) for s in ( 's1', 's3', 's2', 's4' ) ]
 	
 	# Add router links
-        self.addLink(s1, router, intfName2='r0s1-eth1',
+        self.addLink(s1, router, intfName2='r0-eth1',
                       params2={ 'ip' : subnet1 } )
-        self.addLink(sDMZ, router, intfName2='r0sdmz-eth2',
+        self.addLink(sDMZ, router, intfName2='r0-eth3',
                       params2={ 'ip' : dmz } )
-        self.addLink(s2, router, intfName2='r0s2-eth3',
+        self.addLink(s2, router, intfName2='r0-eth2',
                       params2={ 'ip' : subnet2 } )
-        self.addLink(sEXT, router, intfName2='r0sext-eth4',
+        self.addLink(sEXT, router, intfName2='r0-eth4',
                       params2={ 'ip' : ext} )
 
     # Add hosts
