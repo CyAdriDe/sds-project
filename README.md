@@ -1,8 +1,8 @@
 # sds-project
 ## Running the topology
-First enable the venv with:
+First install the dependencies with:
 ```
-source sds_venv/bin/activate
+pip3 install -r requirements.txt
 ```
 After that you must run the topology with:
 ```
