@@ -4,7 +4,7 @@ from mininet.net import Mininet
 from mininet.node import Node
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
-
+from mininet.node import Controller, RemoteController
 
 class LinuxRouter( Node ):
     
@@ -75,6 +75,7 @@ class NetworkTopo( Topo ):
 def run():
     topo = NetworkTopo()
     net = Mininet( topo=topo,
+    		    controller=RemoteController,
                    waitConnected=True)
     net.start()
     net[ 's1' ].cmd( 'route add -net 192.168.1.0/24 dev s1-eth4' )
