@@ -40,15 +40,27 @@ print('alertmsg: %s' % msg.alertmsg[0].decode())
 ```
 Then, to verify the snort behaviour, run in different terminals first the python3 and then the ovs-vsctl:
 ```
-sudo python3 routerProject.py
+sudo cp ../snort/conf /etc/snort/ && \
+sudo chown snort:snort /etc/snort/.conf && \
+sudo cp ../snort/*rules /etc/snort/rules/
 ```
-```
-sudo ovs-vsctl add-port r0 r0-snort &&
-sudo ovs-ofctl show r0
-```
+
 ```
 sudo ryu-manager ~/ryu/ryu/app/simple_switch_snort.py
 ```
+```
+sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+```
+```
+sudo python3 routerProject.py
+```
+
+sudo kill -9 $(ps aux | grep 'snort' | awk '{print $2}') && sudo systemctl restart snort.service
+
+
+IMPORTANT!!!
+sudo systemctl restart snort
+sudo mn -c
 
 ## Once the Mininet and Snort are running, it's time to start the Load Balancer in the s3 - DMZ switch, with 2 HTTP servers inside the subnet
 
