@@ -83,7 +83,7 @@ def run():
     net.start()
     net[ 's1' ].cmd( 'route add -net 192.168.1.0/24 dev s1-eth4' )
     net[ 's2' ].cmd( 'route add -net 192.168.0.0/24 dev s2-eth4' )
-    net[ 'r0' ].cmd( 'haproxy -db -f /etc/haproxy/haproxy.cfg &' )
+    net[ 'r0' ].cmd( 'haproxy -db -f ./resources/haproxy.cfg &' )
     net[ 'dmzserver1' ].cmd( 'python3 -m http.server --directory ~/ 80 &' )
     net[ 'dmzserver2' ].cmd( 'python3 -m http.server 80 &' )
     time.sleep(1)
