@@ -4,7 +4,7 @@ from mininet.net import Mininet
 from mininet.node import Node
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
-from mininet.node import Controller, RemoteController
+from mininet.node import RemoteController, OVSSwitch
 
 class LinuxRouter( Node ):
     
@@ -76,16 +76,23 @@ def run():
     topo = NetworkTopo()
     net = Mininet( topo=topo,
     		    controller=RemoteController,
-                   waitConnected=True)
+                   waitConnected=True,
+                   switch=OVSSwitch)
     net.start()
     net[ 's1' ].cmd( 'route add -net 192.168.1.0/24 dev s1-eth4' )
     net[ 's2' ].cmd( 'route add -net 192.168.0.0/24 dev s2-eth4' )
+    net[ 'dmzserver1' ].cmd( 'python3 -m http.server 80 &' )
+    net[ 'dmzserver2' ].cmd( 'python3 -m http.server 80 &' )
     info( '*** Routing Table on Router:\n' )
     info( net[ 'r0' ].cmd( 'route' ) )
     info( '*** Routing Table on Switch 1:\n' )
     info( net[ 's1' ].cmd( 'route' ) )
     info( '*** Routing Table on Switch 2:\n' )
     info( net[ 's2' ].cmd( 'route' ) )
+    info( '*** Status HTTP server 1:\n' )
+    info( net[ 'r0' ].cmd( 'curl -I 172.16.0.101 | grep HTTP/1.0' ) )
+    info( '*** Status HTTP server 2:\n' )
+    info( net[ 'r0' ].cmd( 'curl -I 172.16.0.102 | grep HTTP/1.0' ) )
     CLI(net)
     net.stop()
 
