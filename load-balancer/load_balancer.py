@@ -15,14 +15,14 @@ from ryu.lib.packet import ethernet
 class LoadBalancer(simple_switch_13.SimpleSwitch13):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
-    VIRTUAL_IP = '10.0.0.100'  # The virtual server IP
+    VIRTUAL_IP = '172.16.0.1'  # The virtual s3 - dmz 
 
-    SERVER1_IP = '10.0.0.1'
-    SERVER1_MAC = '00:00:00:00:00:01'
-    SERVER1_PORT = 1
-    SERVER2_IP = '10.0.0.2'
-    SERVER2_MAC = '00:00:00:00:00:02'
-    SERVER2_PORT = 2
+    SERVER1_IP = '172.16.0.101' # HTTP SERVER 1
+    SERVER1_MAC = '9e:6f:95:79:d0:96'
+    SERVER1_PORT = 80 # HTTP SERVER PORT
+    SERVER2_IP = '172.16.0.102' # HTTP SERVER 2
+    SERVER2_MAC = '36:1e:21:17:67:a4'
+    SERVER2_PORT = 80 # HTTP SERVER PORT
 
     def __init__(self, *args, **kwargs):
         super(LoadBalancer, self).__init__(*args, **kwargs)
