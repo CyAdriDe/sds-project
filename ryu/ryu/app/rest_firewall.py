@@ -356,6 +356,7 @@ class FirewallOfsList(dict):
 
             if dpid in self:
                 dps = {dpid: self[dpid]}
+                print('Switch identifier:', dpid)  # Print the switch identifier       
             else:
                 msg = 'firewall sw is not connected. : switchID=%s' % dp_id
                 raise ValueError(msg)
@@ -1084,7 +1085,7 @@ class Action(object):
             action = [{'type': 'OUTPUT',
                        'port': 'NORMAL'}]
         elif value == REST_ACTION_DENY:
-            action = []
+            action = [{'type': 'DROP'}]  # Explicitly set the action to drop the packet
         elif value == REST_ACTION_PACKETIN:
             action = [{'type': 'OUTPUT',
                        'port': 'CONTROLLER',
