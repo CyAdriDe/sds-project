@@ -31,7 +31,7 @@ And comment this other one (one example could be the ICMP if another rule is set
 ```
 For setup the Snort, run the following commands (creating a new s4-snort interface). Run these commands:
 ```
-sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+sudo ip link del s4-snort & sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
 ```
 The simple_switch_snort.py is located in ~/ryu/ryu/app/. NOTE: change the line 72 by this one:
 ```
