@@ -101,5 +101,12 @@ rm grafana_7.4.3_amd64.deb
 sudo systemctl start grafana-server &&
 sudo systemctl restart grafana-server
 ```
+## 5. Firewall rules
+```
+sudo ryu-manager ryu/ryu/app/rest_firewall.py ryu/ryu/app/simple_switch_snort.py ryu/ryu/app/simple_monitor_13_telegraf.py 
+```
+```
+curl -X PUT http://localhost:8080/firewall/module/enable/0000000000000001 && curl -X PUT http://localhost:8080/firewall/module/enable/0000000000000002 && curl -X PUT http://localhost:8080/firewall/module/enable/0000000000000003 && curl -X PUT http://localhost:8080/firewall/module/enable/0000000000000004 && curl http://localhost:8080/firewall/module/status
+```
 
 
