@@ -1,0 +1,21 @@
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+
+# Configuration for sending metrics to InfluxDB
+[[outputs.influxdb]]
+
+  urls = ["http://:8086"]
+  database = "RYU"
+  skip_database_creation = false
+  timeout = "5s"
+  
+###############################################################################
+#                            INPUT PLUGINS                                    #
+###############################################################################
+
+
+[[inputs.socket_listener]]
+ service_address="udp://:8094"
+ data_format="influx"

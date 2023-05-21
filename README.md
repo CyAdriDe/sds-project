@@ -40,16 +40,16 @@ print('alertmsg: %s' % msg.alertmsg[0].decode())
 ### 3.2. Running Mininet + Snort
 Then, to verify the snort behaviour, run in different terminals:
 ```
-sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+sudo python3 routerProject.py
 ```
 ```
 sudo ryu-manager ~/ryu/ryu/app/simple_switch_snort.py
 ```
 ```
+sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+```
+```
 sudo snort -i s4-snort -A unsock -l /tmp -c /etc/snort/snort.conf
-```
-```
-sudo python3 routerProject.py
 ```
 The previous commands allow to run the Mininet + Snort + LoadBalancer.
 This command HAS to be performed to stop executing Mininet and Snort:
@@ -70,3 +70,36 @@ sudo cp ../snort/*rules /etc/snort/rules/
 Pending Adrian explanation...
 
 ## 4. Grafana part: procedure and commands
+Installing InfluxDB with:
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.8.4_amd64.deb &&
+sudo dpkg -i influxdb_1.8.4_amd64.deb &&
+sudo apt-get update &&
+sudo apt-get install -yq python3-influxdb &&
+rm influxdb_1.8.4_amd64.deb
+```
+Starting and testing InfluxDB:
+```
+sudo systemctl start influxdb &&
+influx
+```
+Now, install the Telegraf with:
+```
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.17.3-1_amd64.deb &&
+sudo dpkg -i telegraf_1.17.3-1_amd64.deb && 
+rm telegraf_1.17.3-1_amd64.deb &&
+sudo mv /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.bup && sudo cp ../telegraf/telegraf.conf /etc/telegraf/
+```
+Now, install Grafana with:
+```
+sudo apt-get install -y libfontconfig1 &&
+wget https://dl.grafana.com/oss/release/grafana_7.4.3_amd64.deb &&
+sudo dpkg -i grafana_7.4.3_amd64.deb &&
+rm grafana_7.4.3_amd64.deb
+```
+```
+sudo systemctl start grafana-server &&
+sudo systemctl restart grafana-server
+```
+
+
