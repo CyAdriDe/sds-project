@@ -1,2 +1,2 @@
 #Ignore the cache from the load balancer
-load-balancer/__pycache__/
+*/__pycache__/
