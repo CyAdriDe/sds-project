@@ -1,2 +1,4 @@
 #Ignore the cache from the load balancer
 load-balancer/__pycache__/
+#Ignore the ryu cache
+ryu/ryu/app/__pycache__/
