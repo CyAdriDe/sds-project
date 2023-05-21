@@ -40,16 +40,16 @@ print('alertmsg: %s' % msg.alertmsg[0].decode())
 ### 3.2. Running Mininet + Snort
 Then, to verify the snort behaviour, run in different terminals:
 ```
-sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+sudo python3 routerProject.py
 ```
 ```
 sudo ryu-manager ~/ryu/ryu/app/simple_switch_snort.py
 ```
 ```
+sudo ip link del s4-snort && sudo ip link add name s4-snort type dummy && sudo ip link set s4-snort up && sudo ovs-vsctl add-port s4 s4-snort && sudo ovs-ofctl show s4
+```
+```
 sudo snort -i s4-snort -A unsock -l /tmp -c /etc/snort/snort.conf
-```
-```
-sudo python3 routerProject.py
 ```
 The previous commands allow to run the Mininet + Snort + LoadBalancer.
 This command HAS to be performed to stop executing Mininet and Snort:
