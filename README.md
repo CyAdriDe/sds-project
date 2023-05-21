@@ -70,4 +70,26 @@ sudo cp ../snort/*rules /etc/snort/rules/
 Pending Adrian explanation...
 
 ## 4. Grafana part: procedure and commands
+Installing InfluxDB with:
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.8.4_amd64.deb &&
+sudo dpkg -i influxdb_1.8.4_amd64.deb &&
+sudo apt-get update &&
+sudo apt-get install -yq python3-influxdb &&
+rm influxdb_1.8.4_amd64.deb
+```
+Starting and testing InfluxDB:
+```
+sudo systemctl start influxdb &&
+influx
+```
+Now, install the Telegraf with:
+```
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.17.3-1_amd64.deb &&
+sudo dpkg -i telegraf_1.17.3-1_amd64.deb && 
+rm telegraf_1.17.3-1_amd64.deb &&
+sudo mv /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.bup && sudo cp ../telegraf/telegraf.conf /etc/telegraf/
+```
+
+
 
