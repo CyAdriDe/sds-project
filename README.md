@@ -73,7 +73,9 @@ sudo apt-get install haproxy && sudo systemctl stop haproxy
 ```
 You will notice that we stop the haproxy service since we will launch it at the start of the mininet with a custom configuration.
 
-If you look at the **resources/haproxy.cfg** file you can see the configuration, but the important part is the balancing algorithm. We choose the roundrobin algorithm, which works by equally distributing the load in a circular way between the pool of servers, in our case the 2 servers in the DMZ.
+If you look at the **resources/haproxy.cfg** file you can see the configuration, but the important part is the balancing algorithm. We choose the roundrobin algorithm, which works by equally distributing the load in a circular way between the pool of servers, in our case the 2 servers in the DMZ. In this case is equally distributed because we weighted both servers equally but we can distribute the load balancing if we have a server that can handle more petitions per second we can change it.
+
+Also, haproxy checks the connection to the servers, so if one is down it distributes all the load to the one available.
 
 ## 4. Grafana part: procedure and commands
 Installing InfluxDB with:
