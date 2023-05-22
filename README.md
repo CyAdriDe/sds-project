@@ -66,8 +66,14 @@ sudo cp ../snort/conf /etc/snort/ && \
 sudo chown snort:snort /etc/snort/.conf && \
 sudo cp ../snort/*rules /etc/snort/rules/
 ```
-## 3. Load Balancer: how does it work?
-Pending Adrian explanation...
+## Load Balancer: how does it work?
+For implementing the load balancer we implemented an haproxy to work as a balancer.
+```
+sudo apt-get install haproxy && sudo systemctl stop haproxy
+```
+You will notice that we stop the haproxy service since we will launch it at the start of the mininet with a custom configuration.
+
+If you look at the **resources/haproxy.cfg** file you can see the configuration, but the important part is the balancing algorithm. We choose the roundrobin algorithm, which works by equally distributing the load in a circular way between the pool of servers, in our case the 2 servers in the DMZ.
 
 ## 4. Grafana part: procedure and commands
 Installing InfluxDB with:
